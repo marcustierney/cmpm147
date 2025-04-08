@@ -5,6 +5,7 @@
 // NOTE: This is how we might start a basic JavaaScript OOP project
 
 // Constants - User-servicable parts
+function main() {
 const fillers = { 
   cowtype: ["Holstein Friesian", "Hereford Cattle", "Simmental Cattle", "Aberdeen Angus", "Limousin Cattle", "Belgian Blue", "Belted Galloway", "Red Angus"],
   farmer: ["crop", "livestock", "mixed", "dairy", "poultry", "aquaculture", "apiculture", "rancher"],
@@ -46,3 +47,5 @@ function generate() {
 $("#clicker").click(generate);
 
 generate();
+}
+main();
