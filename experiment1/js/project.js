@@ -44,3 +44,5 @@ function generate() {
 
 /* global clicker */
 $("#clicker").click(generate);
+
+generate();
