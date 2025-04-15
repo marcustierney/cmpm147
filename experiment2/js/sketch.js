@@ -1,79 +1,129 @@
 // sketch.js - purpose and description here
-// Author: Your Name
-// Date:
+// Author: Marcus Tierney
+// Date: 4/14/2025
 
 // Here is how you might set up an OOP p5.js project
 // Note that p5.js looks for a file called sketch.js
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
-const VALUE1 = 1;
-const VALUE2 = 2;
+let seed = 0;
 
-// Globals
-let myInstance;
-let canvasContainer;
-var centerHorz, centerVert;
+const grassColor = "#5a5e00";
+const stoneColor = "#33330b";
+const treeColor = "#191801";
+const hillColor = "#505109"; 
+const hill2Color = "#636807"; 
 
-class MyClass {
-    constructor(param1, param2) {
-        this.property1 = param1;
-        this.property2 = param2;
-    }
-
-    myMethod() {
-        // code to run when method is called
-    }
-}
+$("#reimagine").click(function() {
+  seed++;
+});
 
 function resizeScreen() {
   centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
   centerVert = canvasContainer.height() / 2; // Adjusted for drawing logic
-  console.log("Resizing...");
   resizeCanvas(canvasContainer.width(), canvasContainer.height());
-  // redrawCanvas(); // Redraw everything based on new size
 }
 
-// setup() function is called once when the program starts
-function setup() {
-  // place our canvas, making it fit our container
+function setup() {  
   canvasContainer = $("#canvas-container");
   let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-  canvas.parent("canvas-container");
-  // resize canvas is the page is resized
-
-  // create an instance of the class
-  myInstance = new MyClass("VALUE1", "VALUE2");
-
+  canvas.parent('canvas-container');
   $(window).resize(function() {
     resizeScreen();
   });
   resizeScreen();
 }
 
-// draw() function is called repeatedly, it's the main animation loop
+
+
 function draw() {
-  background(220);    
-  // call a method on the instance
-  myInstance.myMethod();
+  randomSeed(seed);
 
-  // Set up rotation for the rectangle
-  push(); // Save the current drawing context
-  translate(centerHorz, centerVert); // Move the origin to the rectangle's center
-  rotate(frameCount / 100.0); // Rotate by frameCount to animate the rotation
-  fill(234, 31, 81);
+  background(100);
+
   noStroke();
-  rect(-125, -125, 250, 250); // Draw the rectangle centered on the new origin
-  pop(); // Restore the original drawing context
 
-  // The text is not affected by the translate and rotate
-  fill(255);
-  textStyle(BOLD);
-  textSize(140);
-  text("p5*", centerHorz - 105, centerVert + 40);
-}
+  //skycoloring
+  for (let y = 0; y < height / 2; y++) {
+    let inter = map(y, 0, height / 2, 0, 1);
+    let c = lerpColor(color("#6b7871"), color("#ffb347"), inter); 
+    stroke(c);
+    line(0, y, width, y);
+  }
+  noStroke;
 
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-    // code to run when mouse is pressed
+  let sunX = width - 10;
+  let sunY = height / 2 - 10;
+  let sunRadius = 40;
+  
+  noStroke();
+  fill(255, 180, 0, 200);
+  ellipse(sunX, sunY, sunRadius, sunRadius);
+  
+  fill(grassColor);
+  rect(0, height / 2, width, height / 2);
+  noStroke();
+  
+  fill(hillColor); //Hill One
+  beginShape();
+  vertex(0, height / 2 + int(random(30, 80)));
+  vertex(width, height);
+  vertex(width, height / 2);
+  endShape(CLOSE);
+  
+  fill(hill2Color); //Hill 2
+  beginShape();
+  vertex(width , height);
+  vertex(0, height);
+  vertex(0, height / 2 + int(random(20, 40)));
+  vertex(width, height - 20);
+  endShape(CLOSE);
+  
+  fill(stoneColor);
+  beginShape();
+  vertex(0, height / 2);
+  const steps = 30;
+  for (let i = 0; i < steps + 1; i++) {
+    let x = (width * i) / steps;
+    let y =
+      height / 2 - random() * 5;
+    vertex(x, y);
+  }
+  vertex(width, height / 2);
+  endShape(CLOSE);
+
+  fill(treeColor);
+  const trees = 50*random();
+  const scrub = mouseX/width;
+  for (let i = 0; i < trees; i++) {
+    let z = random();
+    if (z < 0.7) {
+      continue; 
+    }
+    let x = random(width);
+    let s = width / 50 / z;
+    let y = height / 2 + height / 20 / z;
+    triangle(x, y - s, x - s / 4, y, x + s / 4, y);
+  }
+  
+  let cloudCount = int(random(3, 7)); //clouds
+  const cloudScrub = mouseX / width;
+
+  for (let i = 0; i < cloudCount; i++) {
+    let z = random();
+    let x = width * ((random() + (cloudScrub / 40 + millis() / 500000.0) / z) % 1);
+    let y = random(20, height / 3);
+    let cloudSize = random(60, 80);
+    
+    let base = int(random(170, 200));
+    let r = base + int(random(10, 30));
+    let g = base - int(random(0, 10));
+    let b = base - int(random(5, 15));
+    fill(r, g, b, 220);
+    noStroke();
+    
+    ellipse(x, y, cloudSize, cloudSize * 0.6);
+    ellipse(x + cloudSize * 0.4, y + 2, cloudSize * 0.8, cloudSize * 0.5);
+    ellipse(x - cloudSize * 0.4, y + 2, cloudSize * 0.8, cloudSize * 0.5);
+  }
+  
 }

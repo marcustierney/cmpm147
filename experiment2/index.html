@@ -40,22 +40,38 @@
 				</div>
                 <div class="fullscreen-box">
                     <button id="fullscreen">Fullscreen</button>
+					<button id="reimagine">Reimagine</button>
                 </div>
 			</div>
 
-			<div class="minor-section">
-				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
-			</div>
+            <div class="two-column">
 
-			<div class="minor-section">
-				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
-			</div>
+                <div class="minor-section">
+                    <h2>Description</h2>
+                    <p>This project offers a generative, living impression of this inspiring image:</p>
+                    <div class="image-wrapper">
+                        <img src="experiment2\img\farmlandscape.jpg">
+                    </div>
+                </div>
+
+                <div class="minor-section">
+                    <h2>Technical</h2>
+                    <p>Relation to inspring image:</p>
+                    <ul>
+                        <li>Color: The sky, grass/hill, tree, treeline, and sunset colors were sampled from the inspiring image using a color picker webiste which takes the colors codes of a given image.</li>
+                        <li>Primitives: The trees are rendered with triangle primitives.</li>
+                        <li>Polygons: The hills and treeline were made using vertex calls</li>
+						<li>Ellipses: The clouds were made using layered ellipses of varying colors.</li>
+                        <li>Composition: Different random seed values lead to different shapes of the hills and treeline and different postions of the clouds and trees.</li>
+						<li>Life: The postion of the clouds is animated to simulate natural cloud movement in response to the horizontal motion of the mouse.</li>
+                    </ul>
+                </div>
+
+            </div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
+				<p>This experiment helped me better understand javascript. I now have a clear grasp of the screen as making ther vertices of the different terrain forced me to figure out the x and y coordinates of the generative image. Overall I had fun recreating the image and seeing its generative aspect with the random() function at use.</p>
 			</div>
 
 		</section>
