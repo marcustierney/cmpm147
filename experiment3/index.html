@@ -25,18 +25,40 @@
 	<!-- Use me for a JavaScript OOP Project -->
 	<script type="text/javascript" src="./js/project.js" DEFER></script>
 	<!-- Use me for a p5.js project -->
-	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
 </head>
 <body>
 	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
 	<main id="content">
 		<section>
 
-			<h1>Experiment X - Subject/Topic</h1>
+			<h1>Experiment 03: Alternate Worlds</h1>
 
 			<div class="minor-section">
 				<div id="canvas-container">
-					<!-- canvas will be added here -->
+					<head>
+						<meta charset="utf-8" />
+						<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+						<meta name="viewport" content="width=device-width, initial-scale=1" />
+					
+						<title>Alternate Worlds</title>
+					
+						<script
+						  src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js"
+						  integrity="sha512-b/htz6gIyFi3dwSoZ0Uv3cuv3Ony7EeKkacgrcVg8CMzu90n777qveu0PBcbZUA7TzyENGtU+qZRuFAkfqgyoQ=="
+						  crossorigin="anonymous"
+						></script>
+						<script src="js/p2_base.js" defer></script>
+						<script src="js/p2_solution.js" defer></script>
+					  </head>
+					  <body>
+						<button id="reseedButton">
+						  reseed
+						</button>
+						<span id="seedReport"></span>
+						<hr />
+						<span id="canvasContainer" style="margin: 10px;"></span>
+						<textarea cols="20" rows="20" id="asciiBox" style="opacity: 0.5; letter-spacing: 1ex; width: 320px; margin: 10px; font-family: monospace;"></textarea>
+					  </body>
 				</div>
                 <div class="fullscreen-box">
                     <button id="fullscreen">Fullscreen</button>
@@ -45,17 +67,17 @@
 
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
+				<p>I created procedurally generated scene of a dungeon room with a "living" aspect to it.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
+				<p>I used a grid generation with each object in the grid set to a certain tile object from the tilesheet asset. The grid randomly drew various objects and terrain within given constraits in order to simulate procedural generation.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
+				<p>As with the other experiments, it took some time to figure out how to use the tools to procedurally generate an object with the right tile, but after I got the hang of it, I found it to be entertaining.</p>
 			</div>
 
 		</section>
