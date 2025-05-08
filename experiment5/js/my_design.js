@@ -27,7 +27,7 @@ function getInspirations() {
 }
 
 function initDesign(inspiration) {
-  resizeCanvas(inspiration.image.width / 8, inspiration.image.height / 8);
+  resizeCanvas(inspiration.image.width / 5, inspiration.image.height / 5);
 
   let design = {
     bg: 128,

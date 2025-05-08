@@ -1,7 +1,6 @@
-// sketch.js - sketch file 
-// Author: Marcus Tierney
-// Date: 5/2/25
-
+/* exported preload, setup, draw */
+/* global memory, dropper, restart, rate, slider, activeScore, bestScore, fpsCounter */
+/* global getInspirations, initDesign, renderDesign, mutateDesign */
 
 let bestDesign;
 let currentDesign;
@@ -12,6 +11,7 @@ let currentInspirationPixels;
 
 function preload() {
   
+
   let allInspirations = getInspirations();
 
   for (let i = 0; i < allInspirations.length; i++) {
@@ -22,7 +22,6 @@ function preload() {
     option.innerHTML = insp.name;
     dropper.appendChild(option);
   }
-  
   dropper.onchange = e => inspirationChanged(allInspirations[e.target.value]);
   currentInspiration = allInspirations[0];
 
@@ -30,12 +29,26 @@ function preload() {
     inspirationChanged(allInspirations[dropper.value]);
 }
 
-function inspirationChanged(nextInspiration) {
+/*function inspirationChanged(nextInspiration) {
   currentInspiration = nextInspiration;
   currentDesign = undefined;
   memory.innerHTML = "";
   setup();
-}
+}*/
+
+function inspirationChanged(nextInspiration) {
+    currentInspiration = nextInspiration;
+    currentDesign = undefined;
+    memory.innerHTML = "";
+  
+    // Set the local image path based on the name
+    let imageName = nextInspiration.name + ".jpg";
+    document.getElementById("originalImage").src = "img/" + imageName;
+  
+    setup();
+  }
+
+
 
 function setup() {
   currentCanvas = createCanvas(width, height);
@@ -59,6 +72,8 @@ function evaluate() {
   }
   return 1/(1+error/n);
 }
+
+
 
 function memorialize() {
   let url = currentCanvas.canvas.toDataURL();
