@@ -3,6 +3,7 @@ let camX = 0;
 let camY = 0;
 let speed = 5;
 let tileInfoP;
+let nightMode = true;
 
 let tileCache = {};
 let streetSpacingCacheX = {};
@@ -20,14 +21,23 @@ function setup() {
 
   tileInfoP = createP("Click a tile to see info.");
   tileInfoP.position(10, 630);
+  
+  nightModeText = createP("Click N to change time of day.");
+  nightModeText.position(110, -4);
 }
 
 function draw() {
   handleInput();
 
+  // Background for day/night
+  if (nightMode) {
+    background(10, 10, 30); // dark night sky
+  } else {
+    background(135, 206, 235); // daytime sky blue
+  }
+
   let cols = ceil(width / tileSize) + 2;
   let rows = ceil(height / tileSize) + 2;
-
   let startX = floor(camX / tileSize) - 1;
   let startY = floor(camY / tileSize) - 1;
 
@@ -48,9 +58,15 @@ function handleInput() {
   if (keyIsDown(DOWN_ARROW)) camY += speed;
 }
 
+function keyPressed() {
+  if (key === 'n' || key === 'N') {
+    nightMode = !nightMode;
+  }
+}
+
 function getStreetSpacingForChunk(coord, cache) {
   if (cache[coord] !== undefined) return cache[coord];
-  let spacing = floor(random(4, 8)); // random size of the buildings between 4 - 7
+  let spacing = floor(random(4, 8));
   cache[coord] = spacing;
   return spacing;
 }
@@ -123,9 +139,8 @@ function getTileAt(x, y) {
     tileCache[key] = { type: "courtyard" };
   } else {
     let buildingType = floor(baseNoise * 4) + 1;
-    let yearNoise = noise(blockSeedX * 0.4, blockSeedY * 0.4);
-    let yearBuilt = floor(map(yearNoise, 0, 1, 1950, 2021));
-    let height = floor(map(yearBuilt, 1950, 2020, 1, 5)); // height from year
+    let yearBuilt = floor(map(noise(x * 0.15, y * 0.15), 0, 1, 1950, 2021));
+    let height = floor(map(yearBuilt, 1950, 2020, 1, 5));
     tileCache[key] = {
       type: blockType,
       buildingType: buildingType,
@@ -141,30 +156,42 @@ function drawTile(tile, x, y) {
   noStroke();
 
   if (tile.type === 'street') {
-    fill(50);
+    fill(nightMode ? 30 : 50);
     rect(x, y, tileSize, tileSize);
+
+    if (nightMode) {
+      fill(255, 255, 100, 150);
+      ellipse(x + tileSize / 2, y + tileSize / 2, 4, 4);
+    }
+
   } else if (tile.type === 'building') {
     let baseColor = color(150, 150, 150);
-    if (tile.buildingType === 1) baseColor = color(0, 0, 255);       // Blue
-    else if (tile.buildingType === 2) baseColor = color(255, 0, 0);   // Red
-    else if (tile.buildingType === 3) baseColor = color(0, 255, 0);   // Green
-    else if (tile.buildingType === 4) baseColor = color(255, 255, 0); // Yellow
+    if (tile.buildingType === 1) baseColor = color(0, 0, 255);
+    else if (tile.buildingType === 2) baseColor = color(255, 0, 0);
+    else if (tile.buildingType === 3) baseColor = color(0, 255, 0);
+    else if (tile.buildingType === 4) baseColor = color(255, 255, 0);
 
     let h = tile.height || 2;
     let shadowOffset = h * 4;
 
-    // Wall (stretched downward for shadow/depth)
-    fill(lerpColor(baseColor, color(0), 0.2)); // darker wall
+    let wallColor = lerpColor(baseColor, color(0), 0.2);
+    if (nightMode) {
+      baseColor.setAlpha(180);
+      wallColor.setAlpha(120);
+    }
+
+    fill(wallColor);
     rect(x, y - shadowOffset, tileSize, tileSize + shadowOffset);
 
-    // Roof (original tile size at top)
     fill(baseColor);
     rect(x, y - shadowOffset, tileSize, tileSize);
+
+
   } else if (tile.type === 'park') {
-    fill(34, 139, 34);
+    fill(nightMode ? color(20, 60, 20) : color(34, 139, 34));
     rect(x, y, tileSize, tileSize);
   } else if (tile.type === 'parking') {
-    fill(200);
+    fill(nightMode ? 80 : 200);
     rect(x, y, tileSize, tileSize);
     stroke(255);
     strokeWeight(1);
@@ -173,7 +200,7 @@ function drawTile(tile, x, y) {
     }
     noStroke();
   } else if (tile.type === 'courtyard') {
-    fill(180, 180, 160);
+    fill(nightMode ? 60 : color(180, 180, 160));
     rect(x, y, tileSize, tileSize);
   }
 }
