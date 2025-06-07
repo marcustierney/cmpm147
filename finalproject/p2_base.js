@@ -13,6 +13,7 @@ let reseedButton;
 
 function setup() {
   createCanvas(800, 600);
+  
   reseedWorld();
 
   reseedButton = createButton("Reseed City");
