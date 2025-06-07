@@ -134,7 +134,7 @@ function getTileAt(x, y) {
   let clusterSeed = noise(blockSeedX * 0.2 + 100, blockSeedY * 0.2 + 100);
   let localSeed = noise(x * 0.3 + clusterSeed * 100, y * 0.3 + clusterSeed * 100);
 
-  let clusterThreshold = 0.6;
+  let clusterThreshold = 0.4;
   if (blockType === "building" && localSeed < clusterThreshold) {
     tileCache[key] = { type: "courtyard" };
   } else {
