@@ -62,7 +62,7 @@ function preload() {
 }
 
 function setup() {
-  let canvas = createCanvas(800, 400);
+  let canvas = createCanvas(1139, 500);
   canvas.parent("container");
 
   camera_offset = new p5.Vector(-width / 2, height / 2);

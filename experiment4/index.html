@@ -23,19 +23,19 @@
 	<link rel="stylesheet" href="/style.css" />
     <script src="js/xxhash.min.js" defer></script>
     <script src="js/engine.js" defer></script>
-    <script src="js/my_world.js" defer></script>
+    <script src="js/my_world.js" defer></script> 
+    <!--google font  -->
+     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
 	<main id="content">
 		<section>
 
-			<h1>Experiment 4 - Infinite Worlds</h1>
+			<h1> Infinite World of the Okinawan Ocean</h1>
 
 			<div class="minor-section">
-                <h2>Flying into Minneapolis Over the Lake Country</h2>
 				<div id="canvas-container">
-					<head>
 						<title>River Rock Generation</title>
 						<meta charset="utf-8" />
 						<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -45,10 +45,7 @@
 						<script src="xxhash.min.js" defer></script>
 						<script src="engine.js" defer></script>
 						<script src="my_world.js" defer></script>
-					  </head>
-					  <body>
 						<div id="container"></div>
-					  </body>
 				</div>
 			</div>
 
@@ -58,17 +55,9 @@
                 </div>
                 <div>
                     <h2>Description</h2>
-
-					<p>My world is a river with rocky mountains. The photo I chose was a picture I took while I was in Okinawa.</p>
-
-                    <p>I used the infinite extent of my world to represent a river with a rocky mountain-like terrain.</p>
-                    
-                    <p> As the audience browses my world, they’ll see rivers and rocky terrainof varying heights.</p>
-
-                    <p>Different worlds will have different river and mountain sizes.</p>
-                    
-                    <p>Clicking tiles causes wooden bridges to placed but only on the water blocks.</p>
-                        
+					<p>My world is a river with rocky mountains. The photo I chose was a picture I took while I was in Okinawa.I used the infinite extent of my world to represent a river with a rocky mountain-like terrain.As the audience browses my world, they'll see rivers and rocky terrain of varying heights.
+                    Different worlds will have different river and mountain sizes.
+                    Clicking tiles causes wooden bridges to be placed but only on the water blocks.</p>
                 </div>
 			</div>
 
@@ -76,19 +65,8 @@
 				<h2>Technical</h2>
 				<p>I utilize a combination of procedural generation algorithms to create a dynamically evolving virtual landscape. The core of the experiment lies in the unique hash value generated from user interactions seeds the procedural algorithms. Using the XXH32 hashing function and p5.js's built-in noiseSeed and randomSeed methods, each input generates a distinct visual output on a grid of tiles. Each tile, depending on its hashed value, displays different shades and shapes, responding to clicks by altering its appearance and opacity. The technical architecture is designed to mimic infinite possibilities within a contained digital ecosystem, allowing each user's journey through the landscape to be unique and personal. The setup leverages JavaScript's flexibility and the p5.js library's graphical capabilities to render a responsive and interactive artistic piece.</p>
 			</div>
-
-			<div class="minor-section">
-				<h2>Reflection</h2>
-				<p>As always this experiment took me some time to figure out as there were many functions to deal with. However after I fully grasped how the code worked and realized most of my programming would be in the drawTile function I came to enjoy generating the different terrain. This generation aesthetically appealed to my eyes much more than any of the other past experiments I’ve worked on in class. </p>
-			</div>
-
 		</section>
-		<nav id="links" class="minor-section">
-			<!-- Put link back to homepage here. -->
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-            </ul>
-		</nav>
 	</main>
+</div>
 </body>
 </html>
